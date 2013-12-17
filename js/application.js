@@ -12,11 +12,13 @@ App.ApplicationAdapter = DS.FixtureAdapter;
 module.exports = App;
 
 
-},{"../vendor/ember":8,"../vendor/ember-data":7,"../vendor/handlebars":9,"../vendor/jquery":10}],2:[function(require,module,exports){
+},{"../vendor/ember":9,"../vendor/ember-data":8,"../vendor/handlebars":10,"../vendor/jquery":11}],2:[function(require,module,exports){
 var App = require('./app');
 
 App.Router.map(function() {
-
+  this.resource('tickets', function() {
+    this.resource('ticket', { path: ':ticket_id' });
+  });
 });
 
 
@@ -40,6 +42,7 @@ require('./templates');
 
 App.ApplicationController = require('./controllers/application_controller');
 App.Ticket = require('./models/ticket');
+App.TicketsRoute = require('./routes/tickets_route');
 App.ApplicationView = require('./views/application_view');
 
 require('./config/routes');
@@ -47,7 +50,7 @@ require('./config/routes');
 module.exports = App;
 
 
-},{"./config/app":1,"./config/routes":2,"./controllers/application_controller":3,"./models/ticket":5,"./templates":6,"./views/application_view":11}],5:[function(require,module,exports){
+},{"./config/app":1,"./config/routes":2,"./controllers/application_controller":3,"./models/ticket":5,"./routes/tickets_route":6,"./templates":7,"./views/application_view":12}],5:[function(require,module,exports){
 var Ticket = DS.Model.extend({
   title: DS.attr('string'),
   description: DS.attr('string'),
@@ -59,12 +62,32 @@ Ticket.FIXTURES = [{
   title: 'Ticket 1',
   description: 'This is a new ticket about something broken',
   status: 'New'
+},{
+  id: 2,
+  title: 'Ticket 2',
+  description: 'This is yet another ticket of something broken',
+  status: 'New'
+},{
+  id: 3,
+  title: 'Ticket 3',
+  description: 'This is getting boring to type out',
+  status: 'New'
 }];
 
 module.exports = Ticket;
 
 
 },{}],6:[function(require,module,exports){
+var TicketsRoute = Ember.Route.extend({
+  model: function() {
+    return this.get('store').findAll('ticket');
+  }
+});
+
+module.exports = TicketsRoute;
+
+
+},{}],7:[function(require,module,exports){
 
 Ember.TEMPLATES['application'] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
@@ -77,6 +100,18 @@ function program1(depth0,data) {
   data.buffer.push("EmberTrackr");
   }
 
+function program3(depth0,data) {
+  
+  
+  data.buffer.push("Home");
+  }
+
+function program5(depth0,data) {
+  
+  
+  data.buffer.push("Tickets");
+  }
+
   data.buffer.push("<div id=\"wrap\">\n  <header class=\"navbar navbar-inverse navbar-fixed-top\">\n    <div class=\"container\">\n      <div class=\"navbar-header\">\n        ");
   hashContexts = {'class': depth0};
   hashTypes = {'class': "STRING"};
@@ -85,7 +120,19 @@ function program1(depth0,data) {
   },inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
   stack2 = ((stack1 = helpers['link-to'] || depth0['link-to']),stack1 ? stack1.call(depth0, "index", options) : helperMissing.call(depth0, "link-to", "index", options));
   if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
-  data.buffer.push("\n      </div>\n    </div>\n  </header>\n\n  <div role=\"main\" class=\"container\">\n    ");
+  data.buffer.push("\n      </div>\n      <ul class=\"nav navbar-nav\">\n        <li>");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers['link-to'] || depth0['link-to']),stack1 ? stack1.call(depth0, "index", options) : helperMissing.call(depth0, "link-to", "index", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("</li>\n        <li>");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers['link-to'] || depth0['link-to']),stack1 ? stack1.call(depth0, "tickets", options) : helperMissing.call(depth0, "link-to", "tickets", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("</li>\n      </ul>\n    </div>\n  </header>\n\n  <div role=\"main\" class=\"container\">\n    ");
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "outlet", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
@@ -108,9 +155,73 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   
 });
 
+Ember.TEMPLATES['ticket'] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
+  var buffer = '', hashTypes, hashContexts, escapeExpression=this.escapeExpression;
 
 
-},{}],7:[function(require,module,exports){
+  data.buffer.push("<dl>\n  <dt>Description</dt>\n  <dd>");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "description", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</dd>\n</dl>\n");
+  return buffer;
+  
+});
+
+Ember.TEMPLATES['tickets'] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
+  var buffer = '', stack1, hashTypes, hashContexts, escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
+
+function program1(depth0,data) {
+  
+  var buffer = '', stack1, stack2, hashTypes, hashContexts, options;
+  data.buffer.push("\n        <li class=\"list-group-item\">\n          ");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},inverse:self.noop,fn:self.program(2, program2, data),contexts:[depth0,depth0],types:["STRING","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers['link-to'] || depth0['link-to']),stack1 ? stack1.call(depth0, "ticket", "", options) : helperMissing.call(depth0, "link-to", "ticket", "", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("\n        </li>\n      ");
+  return buffer;
+  }
+function program2(depth0,data) {
+  
+  var hashTypes, hashContexts;
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "title", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  }
+
+  data.buffer.push("<div class=\"row\">\n  <div class=\"col-md-4\">\n    <ul class=\"list-group\">\n      ");
+  hashTypes = {};
+  hashContexts = {};
+  stack1 = helpers.each.call(depth0, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[],types:[],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n    </ul>\n  </div>\n  <div class=\"col-md-8\">\n    ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "outlet", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n  </div>\n</div>\n");
+  return buffer;
+  
+});
+
+Ember.TEMPLATES['tickets/index'] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
+  
+
+
+  data.buffer.push("<div class=\"panel panel-info\">\n  <div class=\"panel-heading\"><h3 class=\"panel-title\">Tickets</h2></div>\n  <div class=\"panel-body\">Select a ticket from the list on the left.</div>\n</div>\n");
+  
+});
+
+
+
+},{}],8:[function(require,module,exports){
 // ==========================================================================
 // Project:   Ember Data
 // Copyright: ©2011-2012 Tilde Inc. and contributors.
@@ -8227,7 +8338,7 @@ Ember.onLoad('Ember.Application', function(Application) {
 
 })();
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 // Version: v1.0.0
 // Last commit: e2ea0cf (2013-08-31 23:47:39 -0700)
 
@@ -44699,7 +44810,7 @@ Ember.State = generateRemovedClass("Ember.State");
 
 })();
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 /*
 
 Copyright (C) 2011 by Yehuda Katz
@@ -45063,7 +45174,7 @@ Handlebars.template = Handlebars.VM.template;
 })(Handlebars);
 ;
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v1.9.1
  * http://jquery.com/
@@ -54661,7 +54772,7 @@ if ( typeof define === "function" && define.amd && define.amd.jQuery ) {
 }
 
 })( window );
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 var ApplicationView = Ember.View.extend({
   classNames:['application']
 });
