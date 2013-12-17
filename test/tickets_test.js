@@ -4,6 +4,19 @@ module('Tickets', {
   }
 });
 
+test('editing ticket details', function() {
+  visit('/tickets/1')
+  .click('button:contains("Edit")')
+  .fillIn('input[name="title"]','Foo Bar')
+  .click('button:contains("Done")')
+  .then(function() {
+    ok(find('.list-group-item:contains("Foo Bar")').length,
+      'expected title in master list to update');
+    ok(find('.panel-title:contains("Foo Bar")').length,
+      'expected title in detail view to update');
+  });
+});
+
 test('listing tickets', function() {
   visit('/')
   .click('a:contains("Tickets")')
@@ -22,3 +35,4 @@ test('viewing ticket details', function() {
       'expected to find ticket description');
   });
 });
+
