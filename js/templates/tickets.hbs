@@ -2,9 +2,10 @@
   <div class="col-md-4">
     <ul class="list-group">
       {{#each}}
-        <li class="list-group-item">
-          {{#link-to "ticket" this}}{{title}}{{/link-to}}
-        </li>
+        {{#link-to "ticket" this class="list-group-item"}}
+          <span class="badge pull-right">{{status}}</span>
+          {{title}}
+        {{/link-to}}
       {{/each}}
     </ul>
   </div>
