@@ -207,11 +207,13 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
 
 
   data.buffer.push("<div class=\"panel-heading\">\n    <h3 class=\"panel-title\">\n        <div class=\"row\">\n          <div class=\"col-md-9\">\n            ");
-  hashContexts = {'value': depth0,'name': depth0,'class': depth0};
-  hashTypes = {'value': "ID",'name': "STRING",'class': "STRING"};
+  hashContexts = {'value': depth0,'name': depth0,'placeholder': depth0,'autofocus': depth0,'class': depth0};
+  hashTypes = {'value': "ID",'name': "STRING",'placeholder': "STRING",'autofocus': "BOOLEAN",'class': "STRING"};
   options = {hash:{
     'value': ("title"),
     'name': ("title"),
+    'placeholder': ("Title"),
+    'autofocus': (true),
     'class': ("form-control")
   },contexts:[],types:[],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
   data.buffer.push(escapeExpression(((stack1 = helpers.input || depth0.input),stack1 ? stack1.call(depth0, options) : helperMissing.call(depth0, "input", options))));
@@ -225,12 +227,13 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
     'class': ("form-control")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push("\n          </div>\n        </div>\n    </h3>\n  </div>\n  <div class=\"panel-body\">\n      ");
-  hashContexts = {'value': depth0,'name': depth0,'rows': depth0,'class': depth0};
-  hashTypes = {'value': "ID",'name': "STRING",'rows': "STRING",'class': "STRING"};
+  hashContexts = {'value': depth0,'name': depth0,'rows': depth0,'placeholder': depth0,'class': depth0};
+  hashTypes = {'value': "ID",'name': "STRING",'rows': "STRING",'placeholder': "STRING",'class': "STRING"};
   options = {hash:{
     'value': ("description"),
     'name': ("description"),
     'rows': ("12"),
+    'placeholder': ("Description..."),
     'class': ("form-control")
   },contexts:[],types:[],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
   data.buffer.push(escapeExpression(((stack1 = helpers.textarea || depth0.textarea),stack1 ? stack1.call(depth0, options) : helperMissing.call(depth0, "textarea", options))));
@@ -260,11 +263,15 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   hashContexts = {};
   options = {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
   data.buffer.push(escapeExpression(((stack1 = helpers.partial || depth0.partial),stack1 ? stack1.call(depth0, "tickets/form", options) : helperMissing.call(depth0, "partial", "tickets/form", options))));
-  data.buffer.push("\n  <div class=\"panel-footer\">\n    <button ");
+  data.buffer.push("\n  <div class=\"panel-footer clearfix\">\n    <button ");
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "save", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push(" class=\"btn btn-primary pull-right\">Save</button>\n  </div>\n</div>\n");
+  data.buffer.push(" class=\"btn btn-primary pull-right\">Save</button>\n    <button ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "cancel", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(" class=\"btn btn-default\">Cancel</button>\n  </div>\n</div>\n");
   return buffer;
   
 });

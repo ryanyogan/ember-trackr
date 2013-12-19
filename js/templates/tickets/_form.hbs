@@ -2,7 +2,11 @@
     <h3 class="panel-title">
         <div class="row">
           <div class="col-md-9">
-            {{input value=title name="title" class="form-control"}}
+            {{input value=title 
+              name="title"
+              placeholder="Title"
+              autofocus=true
+              class="form-control"}}
           </div>
           <div class="col-md-3">
             {{view Ember.Select
@@ -18,5 +22,6 @@
       {{textarea value=description
         name="description"
         rows="12"
+        placeholder="Description..."
         class="form-control"}}
   </div>
