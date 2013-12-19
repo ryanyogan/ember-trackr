@@ -1,13 +1,16 @@
 <div class="row">
   <div class="col-md-4">
-    <ul class="list-group">
+    <nav class="list-group">
       {{#each}}
         {{#link-to "ticket" this class="list-group-item"}}
           <span class="badge pull-right">{{status}}</span>
           {{title}}
         {{/link-to}}
       {{/each}}
-    </ul>
+    </nav>
+    {{#link-to "tickets.new" class="btn btn-primary btn-block"}}
+      New Ticket
+    {{/link-to}}
   </div>
   <div class="col-md-8">
     {{outlet}}

@@ -7,9 +7,11 @@ require('./templates');
 
 App.ApplicationController = require('./controllers/application_controller');
 App.TicketController = require('./controllers/ticket_controller');
+App.TicketsNewController = require('./controllers/tickets/new_controller');
 App.Ticket = require('./models/ticket');
 App.TicketRoute = require('./routes/ticket_route');
 App.TicketsRoute = require('./routes/tickets_route');
+App.TicketsNewRoute = require('./routes/tickets/new_route');
 App.ApplicationView = require('./views/application_view');
 
 require('./config/routes');
